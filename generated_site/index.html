@@ -1,0 +1,176 @@
+## Frontend
+
+### app.py
+
+```python
+from flask import Flask, render_template
+
+app = Flask(__name__)
+
+@app.route('/')
+def home():
+    return render_template('index.html')
+
+@app.route('/features')
+def features():
+    return render_template('features.html')
+
+@app.route('/team')
+def team():
+    return render_template('team.html')
+
+@app.route('/contact')
+def contact():
+    return render_template('contact.html')
+
+if __name__ == '__main__':
+    app.run(debug=True)
+```
+
+### templates/index.html
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Shopping App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Shopping App</h1>
+    </header>
+    <main>
+        <section>
+            <h2>Features</h2>
+            <ul>
+                <li>Browse and purchase products</li>
+                <li>Create and manage shopping lists</li>
+                <li>Track your orders</li>
+            </ul>
+        </section>
+        <section>
+            <h2>Team</h2>
+            <ul>
+                <li>Name 1</li>
+                <li>Name 2</li>
+                <li>Name 3</li>
+            </ul>
+        </section>
+        <section>
+            <h2>Contact</h2>
+            <p>Email: example@example.com</p>
+            <p>Phone: 123-456-7890</p>
+        </section>
+    </main>
+    <footer>
+        <p>Copyright &copy; 2023 Shopping App</p>
+    </footer>
+</body>
+</html>
+```
+
+### static/styles.css
+
+```css
+body {
+    font-family: sans-serif;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+}
+
+main {
+    padding: 10px;
+}
+
+section {
+    margin-bottom: 10px;
+}
+
+ul {
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+@media (max-width: 768px) {
+    ul {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+    }
+}
+```
+
+## Backend
+
+### server.py
+
+```python
+from flask_restful import Api, Resource, reqparse, abort, fields, marshal_with
+
+app = Flask(__name__)
+api = Api(app)
+
+# Example resource
+class ExampleResource(Resource):
+    def get(self):
+        return {'example': 'Hello, world!'}
+
+    def post(self):
+        parser = reqparse.RequestParser()
+        parser.add_argument('name', type=str, required=True, help='Name is required')
+        args = parser.parse_args()
+        return {'message': 'Hello, {}!'.format(args['name'])}
+
+api.add_resource(ExampleResource, '/example')
+
+if __name__ == '__main__':
+    app.run(debug=True)
+```
+
+### configuration.py
+
+```python
+# Configuration file for the Flask application
+DEBUG = True
+SECRET_KEY = 'my_secret_key'
+SQLALCHEMY_DATABASE_URI = 'sqlite:///db.sqlite'
+```
+
+## File Structure
+
+```
+- app.py
+- templates/
+    - index.html
+- static/
+    - styles.css
+- server.py
+- configuration.py
+- requirements.txt
+- README.md
+```
+
+## Setup Instructions
+
+1. Install the required dependencies using pip:
+```
+pip install Flask Flask-RESTful
+```
+
+2. Create a `db.sqlite` database file in the root directory of the project.
+
+3. Run the Flask application:
+```
+python app.py
+```
+
+4. Visit `http://localhost:5000/` to access the frontend.
+
+5. Visit `http://localhost:5000/api/example` to access the backend API.
