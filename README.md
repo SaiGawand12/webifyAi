@@ -36,7 +36,7 @@ Make sure you have the following installed:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/WebifyAI.git
+   git clone https://github.com/SaiGawand12/WebifyAI.git
    cd WebifyAI
    ```
 
@@ -56,7 +56,7 @@ Make sure you have the following installed:
 
 5. Run the Streamlit app:
    ```bash
-   streamlit run app.py
+   streamlit run streamlit.py
    ```
 
 6. Open the app in your browser at `http://localhost:8501`.
@@ -93,5 +93,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - Thanks to Google Gemini AI for powering the content generation.
 
 ```
-
-This version of the `README.md` file provides clear instructions on setup, usage, customization, and contribution, which would be helpful for users and developers alike.
